@@ -101,7 +101,11 @@ public class Main {
         System.out.println("╔════════════════════════════════════════╗");
         System.out.println("║              NODE LIBRARY              ║"); 
         System.out.println("╠════════════════════════════════════════╣");
+<<<<<<< HEAD
         System.out.println("║    SISTEM MANAJEMEN PERPUSTAKAAN       ║");
+=======
+        System.out.println("║ SISTEM MANAJEMEN PERPUSTAKAAN (ALGODAT)║");
+>>>>>>> e58f7691ba2a07ab18b1d155b4c3f61063db39f8
         System.out.println("╠════════════════════════════════════════╣");
 
         for (int i = 0; i < MENU_OPTIONS.length; i++) {
@@ -118,8 +122,9 @@ public class Main {
         System.out.println("\n");
         // --- UI ENHANCEMENT: Opening Border ---
         System.out.println("╔════════════════════════════════════════════════════════════════════════════╗");
-        typeWriterEffect("║ Selamat datang di NODE LIBRARY!                                            ║", 50);
+        typeWriterEffect("║ Selamat datang di NODE LIBRARY!                                            ║", 20);
         System.out.println("╠════════════════════════════════════════════════════════════════════════════╣");
+<<<<<<< HEAD
         typeWriterEffect("║ Sebuah sistem manajemen perpustakaan yang dibangun menggunakan konsep      ║", 50);
         typeWriterEffect("║ Algoritma dan Struktur Data (Algodat).                                     ║", 50);
         typeWriterEffect("║ Efisiensi sistem didukung oleh implementasi:                               ║", 50);
@@ -127,6 +132,15 @@ public class Main {
         typeWriterEffect("║ - Queue (untuk antrian peminjaman)                                         ║", 50);
         typeWriterEffect("║ - Stack (untuk riwayat transaksi)                                          ║", 50);
         typeWriterEffect("║ - Binary Search Tree (untuk pencarian cepat)                               ║", 50);
+=======
+        typeWriterEffect("║ Sebuah sistem manajemen perpustakaan yang dibangun menggunakan konsep      ║", 15);
+        typeWriterEffect("║ Algoritma dan Struktur Data (Algodat).                                     ║", 20);
+        typeWriterEffect("║ Efisiensi sistem didukung oleh implementasi:                               ║", 20);
+        typeWriterEffect("║ - Linked List (untuk daftar buku)                                          ║", 20);
+        typeWriterEffect("║ - Queue (untuk antrian peminjaman)                                         ║", 20);
+        typeWriterEffect("║ - Stack (untuk riwayat transaksi)                                          ║", 20);
+        typeWriterEffect("║ - Binary Search Tree (untuk pencarian cepat)                               ║", 20);
+>>>>>>> e58f7691ba2a07ab18b1d155b4c3f61063db39f8
         System.out.println("╚════════════════════════════════════════════════════════════════════════════╝");
         pause(); // LINE INI MEMASTIKAN JEDA SEBELUM MASUK MENU
 
@@ -233,13 +247,30 @@ public class Main {
         System.out.println("╠════════════════════════════════════════╣");
         
         System.out.print("ID Buku: ");
-        String id = input.nextLine();
+        // [Perubahan 1]: Menggunakan .trim() untuk menghilangkan spasi di awal/akhir
+        String id = input.nextLine().trim(); 
 
         System.out.print("Judul: ");
-        String judul = input.nextLine();
+        String judul = input.nextLine().trim();
 
         System.out.print("Author: ");
-        String author = input.nextLine();
+        String author = input.nextLine().trim();
+        
+        // ==========================================================
+        //         [FUNGSI CHECK VALIDASI DATA KOSONG DITAMBAHKAN DI SINI]
+        // ==========================================================
+        
+        // Pengecekan apakah ID, Judul, atau Author kosong
+        if (id.isEmpty() || judul.isEmpty() || author.isEmpty()) {
+            System.out.println("----------------------------------------");
+            System.out.println("Gagal: ID Buku, Judul, dan Author wajib diisi!");
+            System.out.println("----------------------------------------");
+            System.out.println("╚════════════════════════════════════════╝");
+            pause();
+            return; // Hentikan proses dan kembali ke menu utama
+        }
+        // ==========================================================
+
 
         System.out.print("Tahun Terbit: ");
         int tahun = 0;
@@ -278,7 +309,7 @@ public class Main {
         Book book = bookList.searchBook(id);
 
         if (book == null) {
-            System.out.println("⚠️ Buku tidak ditemukan.");
+            System.out.println("Buku tidak ditemukan.");
             System.out.println("╚════════════════════════════════════════╝");
             pause();
             return;
@@ -296,7 +327,7 @@ public class Main {
         System.out.println("╠════════════════════════════════════════╣"); // Separator
         
         if (book.getStock() <= 0) { 
-            System.out.println("⏳ Stok habis, Anda masuk antrian peminjaman.");
+            System.out.println("Stok habis, Anda masuk antrian peminjaman.");
             borrowQueue.enqueue(data); 
             System.out.println("╚════════════════════════════════════════╝");
             pause();
@@ -306,7 +337,7 @@ public class Main {
         book.setStock(book.getStock() - 1); 
         history.addHistory("PINJAM", data); 
 
-        System.out.println("✅ Buku berhasil dipinjam oleh " + borrowerName + "!");
+        System.out.println("Buku berhasil dipinjam oleh " + borrowerName + "!");
         System.out.println("╚════════════════════════════════════════╝");
         pause();
     }
@@ -323,7 +354,7 @@ public class Main {
         Book book = bookList.searchBook(id);
 
         if (book == null) {
-            System.out.println("⚠️ Buku tidak ditemukan.");
+            System.out.println("Buku tidak ditemukan.");
             System.out.println("╚════════════════════════════════════════╝");
             pause();
             return;
@@ -346,13 +377,12 @@ public class Main {
         
         history.addHistorySimple("KEMBALIKAN", id, returnDate); 
 
-        System.out.println("✅ Buku berhasil dikembalikan!");
+        System.out.println("Buku berhasil dikembalikan!");
         System.out.println("╚════════════════════════════════════════╝");
         pause();
     }
     
     public static void cariBukuTree() {
-        // --- UI ENHANCEMENT: Header ---
         System.out.println("\n╔════════════════════════════════════════╗");
         System.out.println("║         PENCARIAN BUKU (BY ID)         ║");
         System.out.println("╠════════════════════════════════════════╣");
@@ -362,17 +392,17 @@ public class Main {
 
         Book foundBook = tree.search(id);
 
-        System.out.println("╠════════════════════════════════════════╣"); // Separator
+        System.out.println("╠════════════════════════════════════════╣"); 
 
         if (foundBook != null) {
-            System.out.println("✅ Buku dengan ID " + id + " ditemukan di tree!");
+            System.out.println("Buku dengan ID " + id + " ditemukan di tree!");
             System.out.println("Detail Buku:");
             System.out.println("ID    : " + foundBook.id);
             System.out.println("Judul : " + foundBook.title);
             System.out.println("Penulis: " + foundBook.author);
             System.out.println("Tahun : " + foundBook.year + " | Stok: " + foundBook.stock);
         } else {
-            System.out.println("⚠️ Buku tidak ada dalam tree.");
+            System.out.println("Buku tidak ada dalam tree.");
         }
         
         System.out.println("╚════════════════════════════════════════╝");
